@@ -1,0 +1,257 @@
+<html> 
+
+<!-- Angelika Dahlberg 2016-09-12 angelika.dahlberg@gmail.com -->
+    
+<head>
+    <title>Leverantörer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Get the boostrap framework through cdn -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <!-- Link to the stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <!-- Access to google font -->
+    <script src="https://use.fontawesome.com/988ff63760.js"></script>
+    <!-- Access to font awesome icons -->
+</head>
+
+<body ng-app='suppliersApp'>
+    <!-- connects to the SupplierApp in app.js -->
+
+    <div class="container-fluid" ng-controller="MainController">
+        <!-- connects to the controller -->
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1>Lyckans lanthandel {{title}}</h1>
+                <div class="tableTop">
+                    <div class="row">
+
+
+                        <!--  ========== SEARCH FORM =========== -->
+
+                        <form class="col-xs-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                    <input type="text" class="form-control" placeholder="Sök efter leverantör" ng-model="searchSupplier">
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--  ========== ADD NEW SUPPLIER BUTTON =========== -->
+
+                        <div class="col-xs-8 text-right">
+                            <button class="btn btn-default" ng-click="showInputAdd()"><i class="fa fa-plus" aria-hidden="true"></i> Ny leverantör</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!--  ========== HEADERS OF SUPPLIER LIST =========== -->
+
+                <div class="suppliers">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Namn
+                                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'contact'; sortReverse = !sortReverse">Kontakt
+                                <span ng-show="sortType == 'contact' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'contact' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">E-post
+                                <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'number'; sortReverse = !sortReverse">Telefon
+                                <span ng-show="sortType == 'number' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'number' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'category'; sortReverse = !sortReverse">Leverantörstyp
+                                <span ng-show="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'category' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'category'; sortReverse = !sortReverse">Latitud
+                                <span ng-show="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'category' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'category'; sortReverse = !sortReverse">Longitud
+                                <span ng-show="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'category' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                            </th>
+                            <tr></tr>
+
+
+
+                            <!--  ========== HIDDEN ADD NEW INPUT FIELDS =========== -->
+
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierName">
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierContact">
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierEmail">
+
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierNumber">
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <select type="text" class="form-control" ng-model="addSupplierCategory">
+                                    <option ng-repeat="cats in categories" value={{cats.category}}>{{cats.category}}</option>
+                                </select>
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierLatitude">
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <input type="text" class="form-control" ng-model="addSupplierLongitude">
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <button class="btn btn-default" ng-click="addNewSupplier()"><i class="fa fa-check" style="font-size:20px;" aria-hidden="true"></i></button>
+                            </td>
+                            <td ng-hide="hideAddNew">
+                                <button class="btn btn-default" ng-click="cancelAdd()"><i class="fa fa-times" aria-hidden="true" style="font-size:20px;"></i></button>
+                            </td>
+
+                        </tr>
+
+
+                        <!--  ========== LIST OF ALL SUPPLIERS =========== -->
+
+                        <tr class="{{supplier.id}}" ng-repeat="supplier in allSuppliers | orderBy:sortType:sortReverse | filter:searchSupplier">
+
+                            <!-- Shows the present information for each input field -->
+                            <td ng-hide=true>{{supplier.id}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.name}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.contact}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.email}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.number}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.category}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.latitude}}</td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">{{supplier.longitude}}</td>
+
+                            <!-- Buttons -->
+                            <td ng-show="{{supplier.id}}!={{editId}}">
+                                <button class="btn btn-default" ng-click="remove(supplier.id)"><i class="fa fa-trash-o trash" style="font-size:20px;" aria-hidden="true"></i></button>
+                            </td>
+                            <td ng-show="{{supplier.id}}!={{editId}}">
+                                <button class="btn btn-default" ng-click="update(supplier.id)"><i class="fa fa-pencil" style="font-size:20px;" aria-hidden="true"></i></button>
+                            </td>
+
+
+                            <!--  ========== HIDDEN UPDATE SUPPLIER FIELDS =========== -->
+
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.name">
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.contact">
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.email">
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.number">
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <select type="text" class="form-control" ng-model="supplier.category">
+                                    <option ng-repeat="cats in categories" value={{cats.category}}>{{cats.category}}</option>
+                                </select>
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.latitude">
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <input type="text" class="form-control" ng-model="supplier.longitude">
+                            </td>
+
+                            <!-- Buttons -->
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <button class="btn btn-default" ng-click="save(supplier.id, supplier.name, supplier.contact, supplier.email, supplier.number, supplier.category, supplier.latitude, supplier.longitude)"><i class="fa fa-check" style="font-size:20px;" aria-hidden="true"></i></button>
+                            </td>
+                            <td ng-hide="{{supplier.id}}!={{editId}}">
+                                <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true" style="font-size:20px;"></i></button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+
+
+        <!--  ========== GOOGLE MAP =========== -->
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div id="map_canvas">
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+                        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
+                            <!-- gets the coordinates genereated in the controller -->
+                            <ui-gmap-window show="true">
+                                <p>{{m.category}}: {{m.name}}</p>
+                                <!-- Shows the category and name of supplier in information window -->
+                            </ui-gmap-window>
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Container -->
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <!-- Getting the jQuery framwork -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!-- Getting the Angular framwork -->
+
+    <script src='js/app.js'></script>
+    <!-- linking to the angular app -->
+    <script src='js/controllers/MainController.js'></script>
+    <!-- linking to the angular controller -->
+
+    <!-- Linking to google map resources -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0dYYO7VWCKk31zSSD_hd0iNQBBt3rAu8&callback=initMap" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.1/lodash.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="http://cdn.rawgit.com/nmccready/angular-simple-logger/0.0.1/dist/index.js"></script>
+    <script src="https://cdn.rawgit.com/angular-ui/angular-google-maps/master/dist/angular-google-maps.min.js"></script>
+
+
+    <script>
+        $(function() {
+            $.get('db').then(function(data) {
+                $('#resources').empty();
+                $.each(data, function(key, value) {
+                    $('#resources')
+                        .append('<li><a href="' + key + '">' + key + '</a></li>');
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

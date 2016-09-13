@@ -6,9 +6,7 @@
 - In the created folder node_modules\json-server\src\server replace public folder with downloaded public folder
 - In command promt for chosen directory: npm start
 
-
-
--------------- Original readme-file ----------------
+# -------------- Original readme-file ----------------
 
 # Your first assignment
 

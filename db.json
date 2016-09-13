@@ -1,0 +1,64 @@
+{
+  "suppliers": [
+    {
+      "id": 1,
+      "name": "Kickis liv",
+      "contact": "Kicki Danielsson",
+      "number": "0470-31222",
+      "email": "kickislivs@gmail.com",
+      "category": "Kött",
+      "latitude": 56.84235,
+      "longitude": 15.15853
+    },
+    {
+      "id": 2,
+      "name": "Konsum hovmantorp",
+      "contact": "Leif Boork",
+      "number": "0470-32332",
+      "email": "konsumhovmantorp@gmail.com",
+      "category": "Grossist",
+      "latitude": 56.79764,
+      "longitude": 15.11969
+    },
+    {
+      "id": 3,
+      "name": "Björkhyddan",
+      "contact": "Ove Gustavsson",
+      "number": "0470-36532",
+      "email": "bjorkhyddan@gmail.com",
+      "category": "Frukt & grönt",
+      "latitude": 56.78737,
+      "longitude": 15.18652
+    },
+    {
+      "id": 4,
+      "name": "Lyckås Mejeri",
+      "contact": "Stina Larsson",
+      "email": "stina@lyckas.se",
+      "number": "070-35687412",
+      "category": "Mejeri",
+      "latitude": 56.82526,
+      "longitude": 14.98166
+    },
+    {
+      "id": 5,
+      "name": "Bergdala Kött",
+      "contact": "Anton",
+      "email": "anton@bergdala.se",
+      "number": "070-351 12 20",
+      "category": "Kött",
+      "latitude": 56.81411,
+      "longitude": 15.21434
+    },
+    {
+      "id": 6,
+      "name": "Tegnaby gård",
+      "contact": "Ivar",
+      "email": "ivar@tegnabygard.se",
+      "number": "070-326 12 12",
+      "category": "Växter",
+      "latitude": 56.82023,
+      "longitude": 14.91984
+    }
+  ]
+}

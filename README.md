@@ -5,6 +5,7 @@
 - In command promt for chosen directory: npm install
 - In the created folder node_modules\json-server\src\server replace public folder with downloaded public folder
 - In command promt for chosen directory: npm start
+- Go to http://localhost:3000/
 
 
 ------------------------------------

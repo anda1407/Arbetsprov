@@ -7,8 +7,9 @@
 - In command promt for chosen directory: npm start
 
 
--------------- Original readme-file ----------------
+------------------------------------
 
+-------------- Original readme-file ----------------
 # Your first assignment
 
 Hi there. 
